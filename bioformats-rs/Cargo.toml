@@ -56,6 +56,8 @@ members = [
     "crates/bioformats-opus",
     "crates/bioformats-legacy",
     "crates/bioformats-xrm",
+    "crates/bioformats-tiff-wrappers",
+    "crates/bioformats-misc",
 ]
 resolver = "2"
 

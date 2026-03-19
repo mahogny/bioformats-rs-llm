@@ -61,5 +61,7 @@ bioformats-volocity     = { path = "../bioformats-volocity" }
 bioformats-opus         = { path = "../bioformats-opus" }
 bioformats-legacy       = { path = "../bioformats-legacy" }
 bioformats-xrm          = { path = "../bioformats-xrm" }
+bioformats-tiff-wrappers = { path = "../bioformats-tiff-wrappers" }
+bioformats-misc          = { path = "../bioformats-misc" }
 thiserror = { workspace = true }
 log = { workspace = true }

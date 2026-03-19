@@ -114,6 +114,27 @@ fn all_readers() -> Vec<Box<dyn FormatReader>> {
         Box::new(bioformats_legacy::WoolzReader::new()),
         Box::new(bioformats_legacy::PictReader::new()),
         Box::new(bioformats_xrm::XrmReader::new()),
+        // TIFF-based whole-slide / variant formats (extension-only)
+        Box::new(bioformats_tiff_wrappers::NdpiReader::new()),
+        Box::new(bioformats_tiff_wrappers::LeicaScnReader::new()),
+        Box::new(bioformats_tiff_wrappers::VentanaReader::new()),
+        Box::new(bioformats_tiff_wrappers::NikonElementsTiffReader::new()),
+        Box::new(bioformats_tiff_wrappers::FeiTiffReader::new()),
+        Box::new(bioformats_tiff_wrappers::OlympusSisTiffReader::new()),
+        Box::new(bioformats_tiff_wrappers::ImprovisionTiffReader::new()),
+        Box::new(bioformats_tiff_wrappers::ZeissApotomeTiffReader::new()),
+        Box::new(bioformats_tiff_wrappers::FluoviewTiffReader::new()),
+        Box::new(bioformats_tiff_wrappers::MolecularDevicesTiffReader::new()),
+        // Misc extension-only / placeholder formats
+        Box::new(bioformats_misc::Jpeg2000Reader::new()),  // magic-byte detection
+        Box::new(bioformats_misc::QuickTimeReader::new()),
+        Box::new(bioformats_misc::MngReader::new()),
+        Box::new(bioformats_misc::VolocityLibraryReader::new()),
+        Box::new(bioformats_misc::SlideBookReader::new()),
+        Box::new(bioformats_misc::MincReader::new()),
+        Box::new(bioformats_misc::OpenlabLiffReader::new()),
+        Box::new(bioformats_misc::SedatReader::new()),
+        Box::new(bioformats_misc::SmCameraReader::new()),
     ]
 }
 
