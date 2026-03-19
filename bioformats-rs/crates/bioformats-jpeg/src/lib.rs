@@ -1,3 +1,6 @@
+mod writer;
+pub use writer::JpegWriter;
+
 use std::path::{Path, PathBuf};
 use bioformats_common::error::{BioFormatsError, Result};
 use bioformats_common::metadata::{DimensionOrder, ImageMetadata};
