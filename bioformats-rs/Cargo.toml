@@ -1,0 +1,22 @@
+[workspace]
+members = [
+    "crates/bioformats",
+    "crates/bioformats-common",
+    "crates/bioformats-tiff",
+    "crates/bioformats-png",
+    "crates/bioformats-jpeg",
+    "crates/bioformats-bmp",
+    "crates/bioformats-czi",
+]
+resolver = "2"
+
+[workspace.dependencies]
+thiserror = "1"
+byteorder = "1"
+flate2 = "1"
+weezl = "0.1"
+jpeg-decoder = "0.3"
+zstd = "0.13"
+memmap2 = "0.9"
+image = { version = "0.25", default-features = false }
+log = "0.4"

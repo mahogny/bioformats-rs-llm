@@ -1,0 +1,9 @@
+[package]
+name = "bioformats-png"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bioformats-common = { path = "../bioformats-common" }
+image = { workspace = true, features = ["png"] }
+log = { workspace = true }
