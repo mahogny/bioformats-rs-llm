@@ -21,6 +21,18 @@ members = [
     "crates/bioformats-lsm",
     "crates/bioformats-metamorph",
     "crates/bioformats-micromanager",
+    "crates/bioformats-biorad",
+    "crates/bioformats-deltavision",
+    "crates/bioformats-spe",
+    "crates/bioformats-andor",
+    "crates/bioformats-amira",
+    "crates/bioformats-imagic",
+    "crates/bioformats-olympus",
+    "crates/bioformats-flim",
+    "crates/bioformats-clinical",
+    "crates/bioformats-norpix",
+    "crates/bioformats-ome",
+    "crates/bioformats-hamamatsu",
 ]
 resolver = "2"
 

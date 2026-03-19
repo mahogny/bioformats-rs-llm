@@ -1,0 +1,9 @@
+[package]
+name = "bioformats-clinical"
+version = "0.1.0"
+edition = "2021"
+description = "Clinical scanner format readers: ECAT7 PET, Inveon PET/CT, Varian FDF MRI"
+
+[dependencies]
+bioformats-common = { path = "../bioformats-common" }
+log = { workspace = true }

@@ -1,0 +1,9 @@
+[package]
+name = "bioformats-amira"
+version = "0.1.0"
+edition = "2021"
+description = "Amira Mesh (.am/.amiramesh) and Spider EM (.spi) format readers"
+
+[dependencies]
+bioformats-common = { path = "../bioformats-common" }
+log = { workspace = true }

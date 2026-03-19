@@ -26,5 +26,17 @@ bioformats-gatan     = { path = "../bioformats-gatan" }
 bioformats-lsm       = { path = "../bioformats-lsm" }
 bioformats-metamorph = { path = "../bioformats-metamorph" }
 bioformats-micromanager = { path = "../bioformats-micromanager" }
+bioformats-biorad       = { path = "../bioformats-biorad" }
+bioformats-deltavision  = { path = "../bioformats-deltavision" }
+bioformats-spe          = { path = "../bioformats-spe" }
+bioformats-andor        = { path = "../bioformats-andor" }
+bioformats-amira        = { path = "../bioformats-amira" }
+bioformats-imagic       = { path = "../bioformats-imagic" }
+bioformats-olympus      = { path = "../bioformats-olympus" }
+bioformats-flim         = { path = "../bioformats-flim" }
+bioformats-clinical     = { path = "../bioformats-clinical" }
+bioformats-norpix       = { path = "../bioformats-norpix" }
+bioformats-ome          = { path = "../bioformats-ome" }
+bioformats-hamamatsu    = { path = "../bioformats-hamamatsu" }
 thiserror = { workspace = true }
 log = { workspace = true }

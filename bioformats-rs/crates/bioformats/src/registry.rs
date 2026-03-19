@@ -37,10 +37,28 @@ fn all_readers() -> Vec<Box<dyn FormatReader>> {
         Box::new(bioformats_raster::exr_reader()),
         Box::new(bioformats_raster::dds_reader()),
         Box::new(bioformats_raster::farbfeld_reader()),
+        // Additional scientific formats
+        Box::new(bioformats_biorad::BioRadReader::new()),
+        Box::new(bioformats_deltavision::DeltavisionReader::new()),
+        Box::new(bioformats_spe::SpeReader::new()),
+        Box::new(bioformats_andor::AndorSifReader::new()),
+        Box::new(bioformats_amira::AmiraReader::new()),
+        Box::new(bioformats_amira::SpiderReader::new()),
+        Box::new(bioformats_imagic::ImagicReader::new()),
+        Box::new(bioformats_flim::SdtReader::new()),
+        Box::new(bioformats_clinical::Ecat7Reader::new()),
+        Box::new(bioformats_clinical::FdfReader::new()),
+        Box::new(bioformats_hamamatsu::DcimgReader::new()),
+        Box::new(bioformats_norpix::NorpixReader::new()),
+        Box::new(bioformats_norpix::IplabReader::new()),
+        Box::new(bioformats_ome::OmeXmlReader::new()),
+        Box::new(bioformats_olympus::OifReader::new()),
         // Extension-only TIFF-based formats (no distinct magic bytes)
         Box::new(bioformats_lsm::LsmReader::new()),
         Box::new(bioformats_metamorph::MetamorphReader::new()),
         Box::new(bioformats_micromanager::MicromanagerReader::new()),
+        // Extension-only Inveon (hdr+img pair, extension-only detection)
+        Box::new(bioformats_clinical::InveonReader::new()),
         // Extension-only (no magic bytes)
         Box::new(bioformats_raster::tga_reader()),
     ]

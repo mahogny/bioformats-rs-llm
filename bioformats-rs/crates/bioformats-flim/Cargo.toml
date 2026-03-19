@@ -1,0 +1,9 @@
+[package]
+name = "bioformats-flim"
+version = "0.1.0"
+edition = "2021"
+description = "FLIM format readers: Becker & Hickl SDT/SPC"
+
+[dependencies]
+bioformats-common = { path = "../bioformats-common" }
+log = { workspace = true }
