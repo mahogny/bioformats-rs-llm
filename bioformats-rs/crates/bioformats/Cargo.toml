@@ -2,15 +2,23 @@
 name = "bioformats"
 version = "0.1.0"
 edition = "2021"
-description = "Pure Rust reimplementation of Bio-Formats — read scientific image formats"
+description = "Pure Rust reimplementation of Bio-Formats — read/write scientific image formats"
 license = "MIT OR Apache-2.0"
 
 [dependencies]
-bioformats-common = { path = "../bioformats-common" }
-bioformats-tiff   = { path = "../bioformats-tiff" }
-bioformats-png    = { path = "../bioformats-png" }
-bioformats-jpeg   = { path = "../bioformats-jpeg" }
-bioformats-bmp    = { path = "../bioformats-bmp" }
-bioformats-czi    = { path = "../bioformats-czi" }
+bioformats-common    = { path = "../bioformats-common" }
+bioformats-tiff      = { path = "../bioformats-tiff" }
+bioformats-png       = { path = "../bioformats-png" }
+bioformats-jpeg      = { path = "../bioformats-jpeg" }
+bioformats-bmp       = { path = "../bioformats-bmp" }
+bioformats-czi       = { path = "../bioformats-czi" }
+bioformats-raster    = { path = "../bioformats-raster" }
+bioformats-ics       = { path = "../bioformats-ics" }
+bioformats-mrc       = { path = "../bioformats-mrc" }
+bioformats-fits      = { path = "../bioformats-fits" }
+bioformats-nrrd      = { path = "../bioformats-nrrd" }
+bioformats-metaimage = { path = "../bioformats-metaimage" }
+bioformats-lif       = { path = "../bioformats-lif" }
+bioformats-nd2       = { path = "../bioformats-nd2" }
 thiserror = { workspace = true }
 log = { workspace = true }

@@ -1,0 +1,10 @@
+[package]
+name = "bioformats-ics"
+version = "0.1.0"
+edition = "2021"
+description = "ICS/ICS2 (Image Cytometry Standard) reader/writer"
+
+[dependencies]
+bioformats-common = { path = "../bioformats-common" }
+flate2 = { workspace = true }
+log = { workspace = true }

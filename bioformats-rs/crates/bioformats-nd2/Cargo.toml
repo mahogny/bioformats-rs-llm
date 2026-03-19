@@ -1,14 +1,11 @@
 [package]
-name = "bioformats-czi"
+name = "bioformats-nd2"
 version = "0.1.0"
 edition = "2021"
-description = "Zeiss CZI (ZISRAWFILE) format reader"
+description = "Nikon ND2 format reader"
 
 [dependencies]
 bioformats-common = { path = "../bioformats-common" }
 quick-xml = { workspace = true }
-zstd = { workspace = true }
-jpeg-decoder = { workspace = true }
 flate2 = { workspace = true }
-weezl = { workspace = true }
 log = { workspace = true }

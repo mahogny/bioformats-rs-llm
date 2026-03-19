@@ -1,0 +1,11 @@
+[package]
+name = "bioformats-lif"
+version = "0.1.0"
+edition = "2021"
+description = "Leica LIF format reader"
+
+[dependencies]
+bioformats-common = { path = "../bioformats-common" }
+quick-xml = { workspace = true }
+encoding_rs = { workspace = true }
+log = { workspace = true }

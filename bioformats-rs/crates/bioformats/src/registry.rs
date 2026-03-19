@@ -7,18 +7,35 @@ use bioformats_common::io::peek_header;
 
 /// The top-level reader that auto-detects the file format and delegates to the
 /// appropriate format-specific reader.
-///
-/// Mirrors `ImageReader` from the Java library.
 pub struct ImageReader {
     inner: Box<dyn FormatReader>,
 }
 
 fn all_readers() -> Vec<Box<dyn FormatReader>> {
     vec![
+        // Dedicated readers first (most precise magic bytes)
         Box::new(bioformats_tiff::TiffReader::new()),
         Box::new(bioformats_png::PngReader::new()),
         Box::new(bioformats_jpeg::JpegReader::new()),
         Box::new(bioformats_bmp::BmpReader::new()),
+        Box::new(bioformats_czi::CziReader::new()),
+        Box::new(bioformats_nd2::Nd2Reader::new()),
+        Box::new(bioformats_lif::LifReader::new()),
+        Box::new(bioformats_mrc::MrcReader::new()),
+        Box::new(bioformats_fits::FitsReader::new()),
+        Box::new(bioformats_nrrd::NrrdReader::new()),
+        Box::new(bioformats_metaimage::MetaImageReader::new()),
+        Box::new(bioformats_ics::IcsReader::new()),
+        // Generic raster wrappers (via image crate)
+        Box::new(bioformats_raster::gif_reader()),
+        Box::new(bioformats_raster::webp_reader()),
+        Box::new(bioformats_raster::pnm_reader()),
+        Box::new(bioformats_raster::hdr_reader()),
+        Box::new(bioformats_raster::exr_reader()),
+        Box::new(bioformats_raster::dds_reader()),
+        Box::new(bioformats_raster::farbfeld_reader()),
+        // Extension-only (no magic bytes)
+        Box::new(bioformats_raster::tga_reader()),
     ]
 }
 
@@ -43,9 +60,7 @@ impl ImageReader {
             }
         }
 
-        Err(BioFormatsError::UnsupportedFormat(
-            path.display().to_string(),
-        ))
+        Err(BioFormatsError::UnsupportedFormat(path.display().to_string()))
     }
 
     pub fn series_count(&self) -> usize { self.inner.series_count() }

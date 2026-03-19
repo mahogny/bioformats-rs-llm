@@ -5,20 +5,6 @@ use bioformats_common::metadata::ImageMetadata;
 use bioformats_common::writer::FormatWriter;
 
 /// Auto-detecting image writer. Choose an output format by file extension.
-///
-/// # Example
-/// ```no_run
-/// use bioformats::{ImageWriter, ImageMetadata, PixelType};
-/// use std::path::Path;
-///
-/// let mut meta = ImageMetadata::default();
-/// meta.size_x = 64; meta.size_y = 64;
-/// meta.pixel_type = PixelType::Uint8;
-/// meta.image_count = 1;
-///
-/// let data = vec![128u8; 64 * 64];
-/// ImageWriter::save(Path::new("out.tif"), &meta, &[data]).unwrap();
-/// ```
 pub struct ImageWriter {
     inner: Box<dyn FormatWriter>,
 }
@@ -29,6 +15,12 @@ fn writer_for(path: &Path) -> Option<Box<dyn FormatWriter>> {
         Box::new(bioformats_png::PngWriter::new()),
         Box::new(bioformats_jpeg::JpegWriter::new()),
         Box::new(bioformats_bmp::BmpWriter::new()),
+        Box::new(bioformats_raster::TgaWriter::new()),
+        Box::new(bioformats_ics::IcsWriter::new()),
+        Box::new(bioformats_mrc::MrcWriter::new()),
+        Box::new(bioformats_fits::FitsWriter::new()),
+        Box::new(bioformats_nrrd::NrrdWriter::new()),
+        Box::new(bioformats_metaimage::MetaImageWriter::new()),
     ];
     writers.into_iter().find(|w| w.is_this_type(path))
 }
@@ -47,7 +39,7 @@ impl ImageWriter {
         w.close()
     }
 
-    /// Lower-level: create a writer and stream planes manually.
+    /// Lower-level: stream planes manually.
     pub fn open(path: &Path, meta: &ImageMetadata) -> Result<Self> {
         let mut w = writer_for(path).ok_or_else(|| {
             BioFormatsError::UnsupportedFormat(path.display().to_string())
@@ -61,7 +53,5 @@ impl ImageWriter {
         self.inner.save_bytes(plane_index, data)
     }
 
-    pub fn close(&mut self) -> Result<()> {
-        self.inner.close()
-    }
+    pub fn close(&mut self) -> Result<()> { self.inner.close() }
 }
