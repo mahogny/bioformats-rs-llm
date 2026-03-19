@@ -63,5 +63,12 @@ bioformats-legacy       = { path = "../bioformats-legacy" }
 bioformats-xrm          = { path = "../bioformats-xrm" }
 bioformats-tiff-wrappers = { path = "../bioformats-tiff-wrappers" }
 bioformats-misc          = { path = "../bioformats-misc" }
+bioformats-extended      = { path = "../bioformats-extended" }
+bioformats-hcs2          = { path = "../bioformats-hcs2" }
+bioformats-sem           = { path = "../bioformats-sem" }
+bioformats-spm           = { path = "../bioformats-spm" }
+bioformats-camera2       = { path = "../bioformats-camera2" }
+bioformats-flim2         = { path = "../bioformats-flim2" }
+bioformats-misc4         = { path = "../bioformats-misc4" }
 thiserror = { workspace = true }
 log = { workspace = true }

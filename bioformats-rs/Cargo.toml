@@ -58,6 +58,13 @@ members = [
     "crates/bioformats-xrm",
     "crates/bioformats-tiff-wrappers",
     "crates/bioformats-misc",
+    "crates/bioformats-extended",
+    "crates/bioformats-hcs2",
+    "crates/bioformats-sem",
+    "crates/bioformats-spm",
+    "crates/bioformats-camera2",
+    "crates/bioformats-flim2",
+    "crates/bioformats-misc4",
 ]
 resolver = "2"
 
