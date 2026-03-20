@@ -1,6 +1,15 @@
 # bioformats-rs
 
-A pure-Rust reimplementation of [Bio-Formats](https://www.openmicroscopy.org/bio-formats/) — a library for reading (and writing) scientific image formats used in microscopy, medical imaging, and astronomy. No JVM, no native dependencies.
+A pure-Rust reimplementation of [Bio-Formats](https://www.openmicroscopy.org/bio-formats/) 
+— a library for reading (and writing) scientific image formats used in microscopy, medical imaging, and astronomy.
+No JVM, no native dependencies.
+
+This package is experimental and a minimum of testing has been performed. The code need not be correct
+
+## License
+
+The license is derived from Bio-formats, as code is derived from this source. License will be reanalyzed after
+full refactoring
 
 ## Quick start
 
@@ -42,7 +51,6 @@ ImageWriter::save(Path::new("output.tif"), &meta, &planes)?;
 | JPEG | `.jpg` `.jpeg` | 8-bit RGB |
 | BMP | `.bmp` | 8-bit RGB |
 | TGA | `.tga` | 8-bit |
-| PNM / PGM / PPM | `.pnm` `.pgm` `.ppm` `.pbm` `.pfm` | |
 | ICS / ICS2 | `.ics` | Image Cytometry Standard; gzip optional |
 | MRC / CCP4 | `.mrc` `.mrcs` `.map` `.ccp4` | Cryo-EM; uint8/16, int16, float32/64 |
 | FITS | `.fits` `.fit` `.fts` | 2880-byte blocks; big-endian; multi-plane |
@@ -59,9 +67,21 @@ ImageWriter::save(Path::new("output.tif"), &meta, &planes)?;
 | HDR / RGBE | `.hdr` `.rgbe` | Radiance HDR |
 | DDS | `.dds` | DirectDraw Surface |
 | Farbfeld | `.ff` | |
+| PNM / PGM / PPM | `.pnm` `.pgm` `.ppm` `.pbm` `.pfm` | Via `image` crate |
 | Leica LIF | `.lif` | Binary container with UTF-16 XML metadata |
 | Nikon ND2 | `.nd2` | Chunk-based; uncompressed and zlib |
 | Zeiss CZI | `.czi` | ZISRAWFILE segments; uncompressed, JPEG, LZW, Zstd |
+| DICOM | `.dcm` | Unencapsulated pixel data; uint8/16, int16 |
+| NIfTI-1 / Analyze 7.5 | `.nii` `.nii.gz` `.hdr` `.img` | gzip supported |
+| Zeiss LSM | `.lsm` | TIFF-based with CZ_LSMInfo metadata |
+| Applied Precision DeltaVision | `.dv` `.r3d` | Binary header + raw planes |
+| Andor SIF | `.sif` | ASCII header + float32 pixel data |
+| Olympus FV1000 OIF | `.oif` | INI-style header + companion TIFFs |
+| Gatan DM3 / DM4 | `.dm3` `.dm4` | Tag-tree structure; EM format |
+| Bio-Rad PIC | `.pic` | Confocal microscopy |
+| Princeton SPE | `.spe` | Spectroscopy / CCD cameras |
+| Norpix StreamPix | `.seq` | Video sequence; raw frames |
+| Hamamatsu DCIMG | `.dcimg` | Scientific CMOS camera format |
 
 ## API overview
 
@@ -230,19 +250,18 @@ The TIFF writer supports None, Deflate, and LZW compression, and writes valid mu
 
 - **ND2**: JPEG2000-compressed frames (requires an external J2K decoder)
 - **CZI**: JPEG-XR compression
-- **Phase 3+**: HDF5/N5/Zarr, DICOM, NetCDF, Olympus OIF/OIB, Andor SIF, and the remainder of the Bio-Formats format list
-- **Write support** for LIF, ND2, CZI
-- **OME-XML** structured metadata output (basic support added for CZI, OME-TIFF, OME-XML via `reader.ome_metadata()`)
+- **Write support** for LIF, ND2, CZI, PNM
+- **OME metadata**: `reader.ome_metadata()` returns structured physical sizes, channel names, and plane positions for CZI, OME-TIFF, and OME-XML files; richer parsing (instrument, experimenter) not yet implemented
 - **Pyramid writing** for tiled multi-resolution TIFF
 
 ## Comparison with Java Bio-Formats
 
 | Feature | Java Bio-Formats | bioformats-rs |
 |---------|-----------------|---------------|
-| Formats | 200+ | ~20 (Phase 1–2 complete) |
+| Formats | 200+ | ~30 with full pixel read support; 150+ registered |
 | JVM dependency | Required | None |
 | Python bindings | Via scyjava | None (pure Rust) |
-| Metadata output | OME-XML string | Structured Rust types |
+| Metadata output | OME-XML / `IMetadata` | `ImageMetadata` (always) + `OmeMetadata` for CZI/OME-TIFF/OME-XML |
 | Write support | Most formats | TIFF, PNG, JPEG, BMP, TGA, ICS, MRC, FITS, NRRD, MetaImage |
 | Pyramid / tiled read | ✓ | ✓ (TIFF) |
 
@@ -258,6 +277,3 @@ Reading all pixel data from a 512×512 2-channel OME-TIFF (`tubhiswt_C0.ome.tif`
 
 Reproduce with `./bench/run.sh` from the repo root (requires `java` and `bioformats_package.jar` in the repo root).
 
-## License
-
-Licensed under either of [Apache License 2.0](LICENSE-APACHE) or [MIT License](LICENSE-MIT) at your option.
