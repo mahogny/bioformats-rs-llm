@@ -76,3 +76,10 @@ bioformats-cellh5        = { path = "../bioformats-cellh5" }
 bioformats-zvi           = { path = "../bioformats-zvi" }
 thiserror = { workspace = true }
 log = { workspace = true }
+
+[[bench]]
+name = "read_ome_tiff"
+harness = false
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
