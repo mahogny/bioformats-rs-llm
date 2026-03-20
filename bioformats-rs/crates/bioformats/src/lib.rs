@@ -40,4 +40,5 @@ pub use pixel::PixelType;
 pub use reader::FormatReader;
 pub use registry::ImageReader;
 pub use writer_registry::ImageWriter;
+pub use bioformats_common::ome_metadata::{OmeChannel, OmeImage, OmeMetadata, OmePlane};
 pub use bioformats_common::writer::FormatWriter;

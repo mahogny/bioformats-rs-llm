@@ -1,6 +1,7 @@
 use std::path::Path;
 use crate::error::Result;
 use crate::metadata::ImageMetadata;
+use crate::ome_metadata::OmeMetadata;
 
 /// Core trait that every format reader must implement.
 pub trait FormatReader: Send + Sync {
@@ -18,4 +19,10 @@ pub trait FormatReader: Send + Sync {
     fn resolution_count(&self) -> usize { 1 }
     fn set_resolution(&mut self, _level: usize) -> Result<()> { Ok(()) }
     fn resolution(&self) -> usize { 0 }
+    /// Return structured OME metadata if this format carries it, otherwise `None`.
+    ///
+    /// Equivalent to Java Bio-Formats `reader.setMetadataStore(service.createOMEXMLMetadata())`.
+    /// Populated for formats that embed OME-XML or equivalent rich metadata
+    /// (CZI, OME-TIFF, OME-XML). Returns `None` for all other formats.
+    fn ome_metadata(&self) -> Option<OmeMetadata> { None }
 }

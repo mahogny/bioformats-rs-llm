@@ -2,6 +2,7 @@ use std::path::Path;
 
 use bioformats_common::error::{BioFormatsError, Result};
 use bioformats_common::metadata::ImageMetadata;
+use bioformats_common::ome_metadata::OmeMetadata;
 use bioformats_common::reader::FormatReader;
 use bioformats_common::io::peek_header;
 
@@ -253,6 +254,11 @@ impl ImageReader {
         Err(BioFormatsError::UnsupportedFormat(path.display().to_string()))
     }
 
+    /// Return structured OME metadata if supported by the detected format.
+    ///
+    /// Equivalent to Java Bio-Formats `reader.setMetadataStore(service.createOMEXMLMetadata())`.
+    /// Returns `Some` for CZI, OME-TIFF, and OME-XML files; `None` for all others.
+    pub fn ome_metadata(&self) -> Option<OmeMetadata> { self.inner.ome_metadata() }
     pub fn series_count(&self) -> usize { self.inner.series_count() }
     pub fn set_series(&mut self, series: usize) -> Result<()> { self.inner.set_series(series) }
     pub fn series(&self) -> usize { self.inner.series() }

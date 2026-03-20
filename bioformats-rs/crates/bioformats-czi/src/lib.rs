@@ -226,11 +226,12 @@ pub struct CziReader {
     path: Option<PathBuf>,
     meta: Option<ImageMetadata>,
     entries: Vec<DirEntry>,
+    meta_xml: String,
 }
 
 impl CziReader {
     pub fn new() -> Self {
-        CziReader { path: None, meta: None, entries: Vec::new() }
+        CziReader { path: None, meta: None, entries: Vec::new(), meta_xml: String::new() }
     }
 
     fn find_entry(&self, plane_index: u32) -> Option<&DirEntry> {
@@ -274,9 +275,6 @@ impl FormatReader for CziReader {
 
         let mut series_metadata: HashMap<String, MetadataValue> = HashMap::new();
         series_metadata.insert("czi_subblocks".into(), MetadataValue::Int(parsed.entries.len() as i64));
-        if !parsed.meta_xml.is_empty() {
-            series_metadata.insert("MetadataXml".into(), MetadataValue::String(parsed.meta_xml));
-        }
 
         self.meta = Some(ImageMetadata {
             size_x: parsed.width,
@@ -297,12 +295,13 @@ impl FormatReader for CziReader {
             lookup_table: None,
         });
         self.entries = parsed.entries;
+        self.meta_xml = parsed.meta_xml;
         self.path = Some(path.to_path_buf());
         Ok(())
     }
 
     fn close(&mut self) -> Result<()> {
-        self.path = None; self.meta = None; self.entries.clear();
+        self.path = None; self.meta = None; self.entries.clear(); self.meta_xml.clear();
         Ok(())
     }
 
@@ -380,6 +379,11 @@ impl FormatReader for CziReader {
         let (tw, th) = (meta.size_x.min(256), meta.size_y.min(256));
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
+    }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        if self.meta_xml.is_empty() { return None; }
+        Some(bioformats_common::ome_metadata::OmeMetadata::from_czi_xml(&self.meta_xml))
     }
 }
 

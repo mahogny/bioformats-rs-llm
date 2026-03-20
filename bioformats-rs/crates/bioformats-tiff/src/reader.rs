@@ -61,6 +61,8 @@ pub struct TiffReader {
     series: Vec<TiffSeries>,
     current_series: usize,
     current_resolution: usize,
+    /// OME-XML embedded in the first IFD's ImageDescription, if present.
+    ome_xml: Option<String>,
 }
 
 impl TiffReader {
@@ -70,6 +72,7 @@ impl TiffReader {
             series: Vec::new(),
             current_series: 0,
             current_resolution: 0,
+            ome_xml: None,
         }
     }
 
@@ -504,6 +507,19 @@ impl bioformats_common::reader::FormatReader for TiffReader {
         };
         tf.ifds = tf.parser.read_ifds()?;
         self.series = Self::build_series(&tf.ifds, little_endian);
+        // Detect OME-TIFF: OME-XML is stored in the first IFD's ImageDescription.
+        self.ome_xml = self.series.first()
+            .and_then(|s| s.metadata.series_metadata.get("ImageDescription"))
+            .and_then(|v| if let bioformats_common::metadata::MetadataValue::String(s) = v {
+                Some(s.as_str())
+            } else {
+                None
+            })
+            .filter(|desc| {
+                let t = desc.trim_start();
+                t.starts_with("<?xml") || t.starts_with("<OME") || t.contains("<OME ")
+            })
+            .map(str::to_owned);
         self.file = Some(tf);
         self.current_series = 0;
         self.current_resolution = 0;
@@ -513,6 +529,7 @@ impl bioformats_common::reader::FormatReader for TiffReader {
     fn close(&mut self) -> Result<()> {
         self.file = None;
         self.series.clear();
+        self.ome_xml = None;
         Ok(())
     }
 
@@ -584,5 +601,9 @@ impl bioformats_common::reader::FormatReader for TiffReader {
         // Count sub-IFD levels if present; for now return series count
         // (real pyramid detection would use SubIFD tag chains)
         1
+    }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        self.ome_xml.as_deref().map(bioformats_common::ome_metadata::OmeMetadata::from_ome_xml)
     }
 }

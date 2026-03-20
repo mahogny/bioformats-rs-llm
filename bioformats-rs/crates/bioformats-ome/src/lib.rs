@@ -167,10 +167,11 @@ pub struct OmeXmlReader {
     path: Option<PathBuf>,
     meta: Option<ImageMetadata>,
     planes: Vec<Vec<u8>>,
+    raw_xml: Option<String>,
 }
 
 impl OmeXmlReader {
-    pub fn new() -> Self { OmeXmlReader { path: None, meta: None, planes: Vec::new() } }
+    pub fn new() -> Self { OmeXmlReader { path: None, meta: None, planes: Vec::new(), raw_xml: None } }
 }
 impl Default for OmeXmlReader { fn default() -> Self { Self::new() } }
 
@@ -189,6 +190,7 @@ impl FormatReader for OmeXmlReader {
         let xml = fs::read_to_string(path).map_err(BioFormatsError::Io)?;
         let (size_x, size_y, size_z, size_c, size_t, pixel_type, bpp, little_endian, dim_order, planes)
             = parse_ome_xml(&xml)?;
+        self.raw_xml = Some(xml.clone());
 
         let image_count = size_z * size_c * size_t;
         let mut meta_map: HashMap<String, MetadataValue> = HashMap::new();
@@ -209,7 +211,7 @@ impl FormatReader for OmeXmlReader {
         Ok(())
     }
 
-    fn close(&mut self) -> Result<()> { self.path = None; self.meta = None; self.planes.clear(); Ok(()) }
+    fn close(&mut self) -> Result<()> { self.path = None; self.meta = None; self.planes.clear(); self.raw_xml = None; Ok(()) }
     fn series_count(&self) -> usize { 1 }
     fn set_series(&mut self, s: usize) -> Result<()> {
         if s != 0 { Err(BioFormatsError::SeriesOutOfRange(s)) } else { Ok(()) }
@@ -255,5 +257,9 @@ impl FormatReader for OmeXmlReader {
         let (tw, th) = (meta.size_x.min(256), meta.size_y.min(256));
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
+    }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        self.raw_xml.as_deref().map(bioformats_common::ome_metadata::OmeMetadata::from_ome_xml)
     }
 }
