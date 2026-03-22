@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This repo contains a pure-Rust reimplementation of the [Bio-Formats](https://www.openmicroscopy.org/bio-formats/) scientific image I/O library. The `bioformats/` directory is the upstream Java reference implementation. The Rust workspace is at the repo root.
+This repo contains a pure-Rust reimplementation of the [Bio-Formats](https://www.openmicroscopy.org/bio-formats/) scientific image I/O library. The `java-bioformats/` directory is the upstream Java reference implementation. The Rust workspace is at the repo root.
 
 ## Commands
 
@@ -18,7 +18,7 @@ cargo test -p bioformats-tiff        # Test a specific format crate
 cargo test -p bioformats -- format_tests  # Run a specific test module
 ```
 
-The Java Bio-Formats source in `bioformats/` is read-only reference — do not modify it.
+The Java Bio-Formats source in `java-bioformats/` is read-only reference — do not modify it.
 
 ## Architecture
 
@@ -30,7 +30,7 @@ The Java Bio-Formats source in `bioformats/` is read-only reference — do not m
   - `codec.rs` — Compression/decompression (LZW, Deflate, PackBits, JPEG, Zstd)
   - `endian.rs` — Byte-order utilities
 
-- **`bioformats`** — Public facade crate. Exposes `ImageReader` and `ImageWriter` (auto-detecting), re-exports common types. Format detection logic lives in `registry.rs` (magic bytes first, then extension) and `writer_registry.rs`.
+- **`bioformats`** — Public facade crate at the repo root (`src/`). Exposes `ImageReader` and `ImageWriter` (auto-detecting), re-exports common types. Format detection logic lives in `src/registry.rs` (magic bytes first, then extension) and `src/writer_registry.rs`.
 
 - **`bioformats-tiff`** — TIFF/BigTIFF implementation. Exposes its `ifd` and `parser` modules publicly so TIFF-based formats (LSM, MetaMorph, SVS, Flex, etc.) can reuse IFD parsing without duplication.
 
@@ -40,7 +40,7 @@ The Java Bio-Formats source in `bioformats/` is read-only reference — do not m
 
 1. Create a new crate in `crates/bioformats-<name>/`
 2. Implement `FormatReader` and/or `FormatWriter` from `bioformats-common`
-3. Register in `bioformats/src/registry.rs` (magic bytes + extension) and/or `writer_registry.rs`
+3. Register in `src/registry.rs` (magic bytes + extension) and/or `src/writer_registry.rs`
 4. Add as a workspace member in `Cargo.toml` and as a dependency of the `bioformats` crate
 
 ### Key Design Decisions
@@ -53,4 +53,4 @@ The Java Bio-Formats source in `bioformats/` is read-only reference — do not m
 
 ### Tests
 
-Integration tests and round-trip tests are in `crates/bioformats/tests/`. Fixture files (small test images) are in `tests/fixtures/`. Round-trip tests write a file, read it back, and verify data integrity and metadata fields.
+Integration tests and round-trip tests are in `tests/`. Fixture files (small test images) are in `tests/fixtures/`. Round-trip tests write a file, read it back, and verify data integrity and metadata fields.
