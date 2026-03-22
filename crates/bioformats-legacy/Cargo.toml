@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-legacy"
-version = "0.1.0"
-edition = "2021"
-description = "Legacy format readers: Kodak BIP, PICT, Woolz"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

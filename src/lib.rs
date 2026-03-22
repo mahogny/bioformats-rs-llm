@@ -28,6 +28,7 @@
 //! ```
 
 pub mod error;
+pub mod formats;
 pub mod metadata;
 pub mod pixel;
 pub mod reader;

@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-mrc"
-version = "0.1.0"
-edition = "2021"
-description = "MRC/CCP4 format reader/writer (electron microscopy)"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

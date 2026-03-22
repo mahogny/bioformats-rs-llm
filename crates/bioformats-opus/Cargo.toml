@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-opus"
-version = "0.1.0"
-edition = "2021"
-description = "Bruker OPUS spectroscopy and ISS FLIM format readers"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

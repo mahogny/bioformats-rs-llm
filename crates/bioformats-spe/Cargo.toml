@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-spe"
-version = "0.1.0"
-edition = "2021"
-description = "Princeton Instruments SPE format reader"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-deltavision"
-version = "0.1.0"
-edition = "2021"
-description = "Applied Precision DeltaVision (.dv/.r3d) format reader"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

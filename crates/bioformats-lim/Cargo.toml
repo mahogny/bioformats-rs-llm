@@ -1,8 +1,0 @@
-[package]
-name = "bioformats-lim"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

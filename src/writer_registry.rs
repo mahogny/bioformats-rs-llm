@@ -12,15 +12,15 @@ pub struct ImageWriter {
 fn writer_for(path: &Path) -> Option<Box<dyn FormatWriter>> {
     let writers: Vec<Box<dyn FormatWriter>> = vec![
         Box::new(bioformats_tiff::TiffWriter::new()),
-        Box::new(bioformats_png::PngWriter::new()),
-        Box::new(bioformats_jpeg::JpegWriter::new()),
-        Box::new(bioformats_bmp::BmpWriter::new()),
-        Box::new(bioformats_raster::TgaWriter::new()),
-        Box::new(bioformats_ics::IcsWriter::new()),
-        Box::new(bioformats_mrc::MrcWriter::new()),
-        Box::new(bioformats_fits::FitsWriter::new()),
-        Box::new(bioformats_nrrd::NrrdWriter::new()),
-        Box::new(bioformats_metaimage::MetaImageWriter::new()),
+        Box::new(crate::formats::png::PngWriter::new()),
+        Box::new(crate::formats::jpeg::JpegWriter::new()),
+        Box::new(crate::formats::bmp::BmpWriter::new()),
+        Box::new(crate::formats::raster::TgaWriter::new()),
+        Box::new(crate::formats::ics::IcsWriter::new()),
+        Box::new(crate::formats::mrc::MrcWriter::new()),
+        Box::new(crate::formats::fits::FitsWriter::new()),
+        Box::new(crate::formats::nrrd::NrrdWriter::new()),
+        Box::new(crate::formats::metaimage::MetaImageWriter::new()),
     ];
     writers.into_iter().find(|w| w.is_this_type(path))
 }

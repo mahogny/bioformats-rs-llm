@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-avi"
-version = "0.1.0"
-edition = "2021"
-description = "AVI video format reader (RIFF container)"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

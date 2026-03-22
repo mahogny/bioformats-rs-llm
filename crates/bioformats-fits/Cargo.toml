@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-fits"
-version = "0.1.0"
-edition = "2021"
-description = "FITS (Flexible Image Transport System) reader/writer"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }

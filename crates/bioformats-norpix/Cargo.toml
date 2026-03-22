@@ -1,9 +1,0 @@
-[package]
-name = "bioformats-norpix"
-version = "0.1.0"
-edition = "2021"
-description = "Norpix StreamPix SEQ and IPLab format readers"
-
-[dependencies]
-bioformats-common = { path = "../bioformats-common" }
-log = { workspace = true }
