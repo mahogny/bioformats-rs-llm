@@ -61,6 +61,22 @@ pub struct OmePlane {
 // ─── Parsers ──────────────────────────────────────────────────────────────────
 
 impl OmeMetadata {
+    /// Build a minimal `OmeMetadata` from any [`crate::metadata::ImageMetadata`].
+    ///
+    /// Every format reader uses this as a baseline — it captures channel count
+    /// and samples-per-pixel, which are always available. Format-specific
+    /// `ome_metadata()` overrides enrich this with physical sizes, channel
+    /// names, wavelengths, etc.
+    pub fn from_image_metadata(meta: &crate::metadata::ImageMetadata) -> Self {
+        let spp = if meta.is_rgb { meta.size_c } else { 1 };
+        let channels = (0..meta.size_c)
+            .map(|_| OmeChannel { samples_per_pixel: spp, ..Default::default() })
+            .collect();
+        OmeMetadata {
+            images: vec![OmeImage { channels, ..Default::default() }],
+        }
+    }
+
     /// Parse OME-XML into structured metadata.
     ///
     /// Handles both standalone `.ome` files and OME-XML embedded in TIFF

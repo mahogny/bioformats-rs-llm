@@ -439,4 +439,33 @@ impl FormatReader for DicomReader {
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
     }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        use bioformats_common::metadata::MetadataValue;
+        use bioformats_common::ome_metadata::OmeMetadata;
+        let meta = self.meta.as_ref()?;
+        let mut ome = OmeMetadata::from_image_metadata(meta);
+        let img = &mut ome.images[0];
+        // DICOM tag (0028,0030) PixelSpacing: "row_spacing\col_spacing" in mm
+        if let Some(MetadataValue::String(s)) = meta.series_metadata.get("(0028,0030)") {
+            let parts: Vec<&str> = s.splitn(2, |c| c == '\\' || c == '/').collect();
+            if let (Some(row), Some(col)) = (
+                parts.first().and_then(|v| v.trim().parse::<f64>().ok()),
+                parts.get(1).and_then(|v| v.trim().parse::<f64>().ok()),
+            ) {
+                // PixelSpacing is in mm → convert to µm
+                img.physical_size_x = Some(col * 1000.0);
+                img.physical_size_y = Some(row * 1000.0);
+            }
+        }
+        // DICOM tag (0018,0050) SliceThickness in mm
+        if let Some(MetadataValue::String(s)) = meta.series_metadata.get("(0018,0050)") {
+            img.physical_size_z = s.trim().parse::<f64>().ok().map(|v| v * 1000.0);
+        }
+        // PatientName / StudyDescription as image name
+        if let Some(MetadataValue::String(s)) = meta.series_metadata.get("(0010,0010)") {
+            img.name = Some(s.clone());
+        }
+        Some(ome)
+    }
 }

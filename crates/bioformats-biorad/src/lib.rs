@@ -147,4 +147,16 @@ impl FormatReader for BioRadReader {
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
     }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        use bioformats_common::metadata::MetadataValue;
+        use bioformats_common::ome_metadata::OmeMetadata;
+        let meta = self.meta.as_ref()?;
+        let mut ome = OmeMetadata::from_image_metadata(meta);
+        let img = &mut ome.images[0];
+        if let Some(MetadataValue::String(n)) = meta.series_metadata.get("name") {
+            img.name = Some(n.clone());
+        }
+        Some(ome)
+    }
 }

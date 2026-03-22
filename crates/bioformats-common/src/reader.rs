@@ -19,10 +19,17 @@ pub trait FormatReader: Send + Sync {
     fn resolution_count(&self) -> usize { 1 }
     fn set_resolution(&mut self, _level: usize) -> Result<()> { Ok(()) }
     fn resolution(&self) -> usize { 0 }
-    /// Return structured OME metadata if this format carries it, otherwise `None`.
+    /// Return structured OME metadata.
     ///
     /// Equivalent to Java Bio-Formats `reader.setMetadataStore(service.createOMEXMLMetadata())`.
-    /// Populated for formats that embed OME-XML or equivalent rich metadata
-    /// (CZI, OME-TIFF, OME-XML). Returns `None` for all other formats.
-    fn ome_metadata(&self) -> Option<OmeMetadata> { None }
+    ///
+    /// The default implementation returns a baseline populated from
+    /// [`FormatReader::metadata`] (channel count and samples-per-pixel).
+    /// Format-specific overrides enrich this with physical pixel sizes,
+    /// channel names, wavelengths, plane positions, etc.
+    ///
+    /// Must be called after [`FormatReader::set_id`].
+    fn ome_metadata(&self) -> Option<OmeMetadata> {
+        Some(OmeMetadata::from_image_metadata(self.metadata()))
+    }
 }

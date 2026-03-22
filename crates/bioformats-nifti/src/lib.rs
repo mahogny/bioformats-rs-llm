@@ -155,6 +155,10 @@ fn build_metadata(hdr: &NiftiHeader) -> ImageMetadata {
     meta_map.insert("datatype".into(), MetadataValue::Int(hdr.datatype as i64));
     let format_name = if is_nifti_magic(&hdr.magic) { "NIfTI-1" } else { "Analyze7.5" };
     meta_map.insert("format".into(), MetadataValue::String(format_name.into()));
+    // Voxel spacings — NIfTI typically stores in mm; expose for OmeMetadata.
+    if hdr.pixdim[0] > 0.0 { meta_map.insert("voxel_size_x_mm".into(), MetadataValue::Float(hdr.pixdim[0] as f64)); }
+    if hdr.pixdim[1] > 0.0 { meta_map.insert("voxel_size_y_mm".into(), MetadataValue::Float(hdr.pixdim[1] as f64)); }
+    if hdr.pixdim[2] > 0.0 { meta_map.insert("voxel_size_z_mm".into(), MetadataValue::Float(hdr.pixdim[2] as f64)); }
 
     ImageMetadata {
         size_x,
@@ -356,5 +360,24 @@ impl FormatReader for NiftiReader {
         let (tw, th) = (meta.size_x.min(256), meta.size_y.min(256));
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
+    }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        use bioformats_common::metadata::MetadataValue;
+        use bioformats_common::ome_metadata::OmeMetadata;
+        let meta = self.meta.as_ref()?;
+        let mut ome = OmeMetadata::from_image_metadata(meta);
+        let img = &mut ome.images[0];
+        let get_f = |k: &str| -> Option<f64> {
+            if let Some(MetadataValue::Float(v)) = meta.series_metadata.get(k) { Some(*v) } else { None }
+        };
+        // pixdim stored in mm → convert to µm (×1000)
+        img.physical_size_x = get_f("voxel_size_x_mm").map(|v| v * 1000.0);
+        img.physical_size_y = get_f("voxel_size_y_mm").map(|v| v * 1000.0);
+        img.physical_size_z = get_f("voxel_size_z_mm").map(|v| v * 1000.0);
+        if let Some(MetadataValue::String(d)) = meta.series_metadata.get("description") {
+            img.description = Some(d.clone());
+        }
+        Some(ome)
     }
 }

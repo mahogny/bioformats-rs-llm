@@ -150,4 +150,26 @@ impl FormatReader for SpeReader {
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
     }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        use bioformats_common::metadata::MetadataValue;
+        use bioformats_common::ome_metadata::OmeMetadata;
+        let meta = self.meta.as_ref()?;
+        let mut ome = OmeMetadata::from_image_metadata(meta);
+        // Populate per-plane exposure time from the single exposure stored in the header
+        if let Some(MetadataValue::Float(exp)) = meta.series_metadata.get("exposure_time_s") {
+            let img = &mut ome.images[0];
+            img.planes = (0..meta.image_count).map(|i| {
+                let z = i % meta.size_z;
+                let c = (i / meta.size_z) % meta.size_c;
+                let t = i / (meta.size_z * meta.size_c);
+                bioformats_common::ome_metadata::OmePlane {
+                    the_z: z, the_c: c, the_t: t,
+                    exposure_time: Some(*exp),
+                    ..Default::default()
+                }
+            }).collect();
+        }
+        Some(ome)
+    }
 }

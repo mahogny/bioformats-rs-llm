@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This repo contains a pure-Rust reimplementation of the [Bio-Formats](https://www.openmicroscopy.org/bio-formats/) scientific image I/O library. The `bioformats/` directory is the upstream Java reference implementation. The active work is in `bioformats-rs/`.
+This repo contains a pure-Rust reimplementation of the [Bio-Formats](https://www.openmicroscopy.org/bio-formats/) scientific image I/O library. The `bioformats/` directory is the upstream Java reference implementation. The Rust workspace is at the repo root.
 
 ## Commands
 
-All commands run from `bioformats-rs/`:
+All commands run from the repo root:
 
 ```bash
 cargo build                          # Build entire workspace
@@ -53,4 +53,4 @@ The Java Bio-Formats source in `bioformats/` is read-only reference — do not m
 
 ### Tests
 
-Integration tests and round-trip tests are in `bioformats-rs/crates/bioformats/tests/`. Fixture files (small test images) are in `tests/fixtures/`. Round-trip tests write a file, read it back, and verify data integrity and metadata fields.
+Integration tests and round-trip tests are in `crates/bioformats/tests/`. Fixture files (small test images) are in `tests/fixtures/`. Round-trip tests write a file, read it back, and verify data integrity and metadata fields.

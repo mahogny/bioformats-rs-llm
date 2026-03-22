@@ -181,4 +181,20 @@ impl FormatReader for DeltavisionReader {
         let (tx, ty) = ((meta.size_x - tw) / 2, (meta.size_y - th) / 2);
         self.open_bytes_region(plane_index, tx, ty, tw, th)
     }
+
+    fn ome_metadata(&self) -> Option<bioformats_common::ome_metadata::OmeMetadata> {
+        use bioformats_common::metadata::MetadataValue;
+        use bioformats_common::ome_metadata::OmeMetadata;
+        let meta = self.meta.as_ref()?;
+        let mut ome = OmeMetadata::from_image_metadata(meta);
+        let img = &mut ome.images[0];
+        let get_f = |k: &str| -> Option<f64> {
+            if let Some(MetadataValue::Float(v)) = meta.series_metadata.get(k) { Some(*v) } else { None }
+        };
+        // DeltaVision pixel_spacing is stored in µm
+        img.physical_size_x = get_f("pixel_spacing_x");
+        img.physical_size_y = get_f("pixel_spacing_y");
+        img.physical_size_z = get_f("pixel_spacing_z");
+        Some(ome)
+    }
 }

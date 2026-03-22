@@ -193,7 +193,6 @@ impl FormatReader for MyReader {
 ## Workspace structure
 
 ```
-bioformats-rs/
 ├── crates/
 │   ├── bioformats/             # Public facade: ImageReader, ImageWriter, re-exports
 │   ├── bioformats-common/      # Shared: FormatReader/Writer traits, ImageMetadata,
