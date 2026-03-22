@@ -1,1 +1,1 @@
-pub use bioformats_common::error::{BioFormatsError, Result};
+pub use crate::common::error::{BioFormatsError, Result};

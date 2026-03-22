@@ -92,7 +92,7 @@ fn tiff_multi_plane_stack() {
 #[test]
 fn tiff_deflate_round_trip() {
     use bioformats::FormatWriter;
-    use bioformats_tiff::{TiffWriter, WriteCompression};
+    use bioformats::{TiffWriter, WriteCompression};
 
     let mut meta = ImageMetadata::default();
     meta.size_x = 16;

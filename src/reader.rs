@@ -1,1 +1,1 @@
-pub use bioformats_common::reader::FormatReader;
+pub use crate::common::reader::FormatReader;

@@ -7,43 +7,22 @@ license = "GPL 2.0 with some BSD components"
 homepage = "https://www.openmicroscopy.org/bio-formats/"
 
 [workspace]
-members = [
-    "crates/bioformats-common",
-    "crates/bioformats-tiff",
-]
 resolver = "2"
 
-[workspace.dependencies]
-hdf5 = { package = "hdf5-metno", version = "0.12" }
-thiserror = "1"
-zip = "2"
-byteorder = "1"
-flate2 = "1"
-weezl = "0.1"
-jpeg-decoder = "0.3"
-zstd = "0.13"
-memmap2 = "0.9"
-image = { version = "0.25", default-features = false }
-log = "0.4"
-quick-xml = "0.37"
-encoding_rs = "0.8"
-cfb = "0.10"
-
 [dependencies]
-bioformats-common = { path = "crates/bioformats-common", version = "0.1.0" }
-bioformats-tiff   = { path = "crates/bioformats-tiff", version = "0.1.0" }
-thiserror    = { workspace = true }
-log          = { workspace = true }
-hdf5         = { workspace = true }
-zip          = { workspace = true }
-flate2       = { workspace = true }
-weezl        = { workspace = true }
-jpeg-decoder = { workspace = true }
-zstd         = { workspace = true }
-quick-xml    = { workspace = true }
-encoding_rs  = { workspace = true }
-cfb          = { workspace = true }
-image        = { workspace = true, features = ["png", "bmp", "jpeg", "gif", "tga", "webp", "pnm", "hdr", "exr", "dds", "ff"] }
+thiserror    = "1"
+log          = "0.4"
+hdf5         = { package = "hdf5-metno", version = "0.12" }
+zip          = "2"
+flate2       = "1"
+weezl        = "0.1"
+jpeg-decoder = "0.3"
+zstd         = "0.13"
+quick-xml    = "0.37"
+encoding_rs  = "0.8"
+cfb          = "0.10"
+byteorder    = "1"
+image        = { version = "0.25", default-features = false, features = ["png", "bmp", "jpeg", "gif", "tga", "webp", "pnm", "hdr", "exr", "dds", "ff"] }
 
 [[bench]]
 name = "read_ome_tiff"

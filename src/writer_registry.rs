@@ -1,8 +1,8 @@
 use std::path::Path;
 
-use bioformats_common::error::{BioFormatsError, Result};
-use bioformats_common::metadata::ImageMetadata;
-use bioformats_common::writer::FormatWriter;
+use crate::common::error::{BioFormatsError, Result};
+use crate::common::metadata::ImageMetadata;
+use crate::common::writer::FormatWriter;
 
 /// Auto-detecting image writer. Choose an output format by file extension.
 pub struct ImageWriter {
@@ -11,7 +11,7 @@ pub struct ImageWriter {
 
 fn writer_for(path: &Path) -> Option<Box<dyn FormatWriter>> {
     let writers: Vec<Box<dyn FormatWriter>> = vec![
-        Box::new(bioformats_tiff::TiffWriter::new()),
+        Box::new(crate::tiff::TiffWriter::new()),
         Box::new(crate::formats::png::PngWriter::new()),
         Box::new(crate::formats::jpeg::JpegWriter::new()),
         Box::new(crate::formats::bmp::BmpWriter::new()),

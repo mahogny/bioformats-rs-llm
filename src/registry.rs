@@ -1,10 +1,10 @@
 use std::path::Path;
 
-use bioformats_common::error::{BioFormatsError, Result};
-use bioformats_common::metadata::ImageMetadata;
-use bioformats_common::ome_metadata::OmeMetadata;
-use bioformats_common::reader::FormatReader;
-use bioformats_common::io::peek_header;
+use crate::common::error::{BioFormatsError, Result};
+use crate::common::metadata::ImageMetadata;
+use crate::common::ome_metadata::OmeMetadata;
+use crate::common::reader::FormatReader;
+use crate::common::io::peek_header;
 
 /// The top-level reader that auto-detects the file format and delegates to the
 /// appropriate format-specific reader.
@@ -24,7 +24,7 @@ fn all_readers() -> Vec<Box<dyn FormatReader>> {
         Box::new(crate::formats::mias::Al3dReader::new()),
         Box::new(crate::formats::perkinelmer::OpenlabRawReader::new()),
         Box::new(crate::formats::incell::InCellReader::new()),
-        Box::new(bioformats_tiff::TiffReader::new()),
+        Box::new(crate::tiff::TiffReader::new()),
         Box::new(crate::formats::png::PngReader::new()),
         Box::new(crate::formats::jpeg::JpegReader::new()),
         Box::new(crate::formats::bmp::BmpReader::new()),

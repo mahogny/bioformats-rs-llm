@@ -1,1 +1,1 @@
-pub use bioformats_common::pixel_type::PixelType;
+pub use crate::common::pixel_type::PixelType;

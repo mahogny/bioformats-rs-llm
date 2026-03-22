@@ -1,1 +1,1 @@
-pub use bioformats_common::metadata::{DimensionOrder, ImageMetadata, LookupTable, MetadataValue};
+pub use crate::common::metadata::{DimensionOrder, ImageMetadata, LookupTable, MetadataValue};
