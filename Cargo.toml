@@ -96,74 +96,74 @@ encoding_rs = "0.8"
 cfb = "0.10"
 
 [dependencies]
-bioformats-common    = { path = "crates/bioformats-common" }
-bioformats-tiff      = { path = "crates/bioformats-tiff" }
-bioformats-png       = { path = "crates/bioformats-png" }
-bioformats-jpeg      = { path = "crates/bioformats-jpeg" }
-bioformats-bmp       = { path = "crates/bioformats-bmp" }
-bioformats-czi       = { path = "crates/bioformats-czi" }
-bioformats-raster    = { path = "crates/bioformats-raster" }
-bioformats-ics       = { path = "crates/bioformats-ics" }
-bioformats-mrc       = { path = "crates/bioformats-mrc" }
-bioformats-fits      = { path = "crates/bioformats-fits" }
-bioformats-nrrd      = { path = "crates/bioformats-nrrd" }
-bioformats-metaimage = { path = "crates/bioformats-metaimage" }
-bioformats-lif       = { path = "crates/bioformats-lif" }
-bioformats-nd2       = { path = "crates/bioformats-nd2" }
-bioformats-dicom     = { path = "crates/bioformats-dicom" }
-bioformats-nifti     = { path = "crates/bioformats-nifti" }
-bioformats-gatan     = { path = "crates/bioformats-gatan" }
-bioformats-lsm       = { path = "crates/bioformats-lsm" }
-bioformats-metamorph = { path = "crates/bioformats-metamorph" }
-bioformats-micromanager = { path = "crates/bioformats-micromanager" }
-bioformats-biorad       = { path = "crates/bioformats-biorad" }
-bioformats-deltavision  = { path = "crates/bioformats-deltavision" }
-bioformats-spe          = { path = "crates/bioformats-spe" }
-bioformats-andor        = { path = "crates/bioformats-andor" }
-bioformats-amira        = { path = "crates/bioformats-amira" }
-bioformats-imagic       = { path = "crates/bioformats-imagic" }
-bioformats-olympus      = { path = "crates/bioformats-olympus" }
-bioformats-flim         = { path = "crates/bioformats-flim" }
-bioformats-clinical     = { path = "crates/bioformats-clinical" }
-bioformats-norpix       = { path = "crates/bioformats-norpix" }
-bioformats-ome          = { path = "crates/bioformats-ome" }
-bioformats-hamamatsu    = { path = "crates/bioformats-hamamatsu" }
-bioformats-pcx          = { path = "crates/bioformats-pcx" }
-bioformats-photoshop    = { path = "crates/bioformats-photoshop" }
-bioformats-simfcs       = { path = "crates/bioformats-simfcs" }
-bioformats-svs          = { path = "crates/bioformats-svs" }
-bioformats-prairie      = { path = "crates/bioformats-prairie" }
-bioformats-eps          = { path = "crates/bioformats-eps" }
-bioformats-afm          = { path = "crates/bioformats-afm" }
-bioformats-lim          = { path = "crates/bioformats-lim" }
-bioformats-aim          = { path = "crates/bioformats-aim" }
-bioformats-zip          = { path = "crates/bioformats-zip" }
-bioformats-fake         = { path = "crates/bioformats-fake" }
-bioformats-viff         = { path = "crates/bioformats-viff" }
-bioformats-incell       = { path = "crates/bioformats-incell" }
-bioformats-visitech     = { path = "crates/bioformats-visitech" }
-bioformats-perkinelmer  = { path = "crates/bioformats-perkinelmer" }
-bioformats-mias         = { path = "crates/bioformats-mias" }
-bioformats-avi          = { path = "crates/bioformats-avi" }
-bioformats-lei          = { path = "crates/bioformats-lei" }
-bioformats-flex         = { path = "crates/bioformats-flex" }
-bioformats-volocity     = { path = "crates/bioformats-volocity" }
-bioformats-opus         = { path = "crates/bioformats-opus" }
-bioformats-legacy       = { path = "crates/bioformats-legacy" }
-bioformats-xrm          = { path = "crates/bioformats-xrm" }
-bioformats-tiff-wrappers = { path = "crates/bioformats-tiff-wrappers" }
-bioformats-misc          = { path = "crates/bioformats-misc" }
-bioformats-extended      = { path = "crates/bioformats-extended" }
-bioformats-hcs2          = { path = "crates/bioformats-hcs2" }
-bioformats-sem           = { path = "crates/bioformats-sem" }
-bioformats-spm           = { path = "crates/bioformats-spm" }
-bioformats-camera2       = { path = "crates/bioformats-camera2" }
-bioformats-flim2         = { path = "crates/bioformats-flim2" }
-bioformats-misc4         = { path = "crates/bioformats-misc4" }
-bioformats-imaris        = { path = "crates/bioformats-imaris" }
-bioformats-bdv           = { path = "crates/bioformats-bdv" }
-bioformats-cellh5        = { path = "crates/bioformats-cellh5" }
-bioformats-zvi           = { path = "crates/bioformats-zvi" }
+bioformats-common    = { path = "crates/bioformats-common", version = "0.1.0" }
+bioformats-tiff      = { path = "crates/bioformats-tiff", version = "0.1.0" }
+bioformats-png       = { path = "crates/bioformats-png", version = "0.1.0" }
+bioformats-jpeg      = { path = "crates/bioformats-jpeg", version = "0.1.0" }
+bioformats-bmp       = { path = "crates/bioformats-bmp", version = "0.1.0" }
+bioformats-czi       = { path = "crates/bioformats-czi", version = "0.1.0" }
+bioformats-raster    = { path = "crates/bioformats-raster", version = "0.1.0" }
+bioformats-ics       = { path = "crates/bioformats-ics", version = "0.1.0" }
+bioformats-mrc       = { path = "crates/bioformats-mrc", version = "0.1.0" }
+bioformats-fits      = { path = "crates/bioformats-fits", version = "0.1.0" }
+bioformats-nrrd      = { path = "crates/bioformats-nrrd", version = "0.1.0" }
+bioformats-metaimage = { path = "crates/bioformats-metaimage", version = "0.1.0" }
+bioformats-lif       = { path = "crates/bioformats-lif", version = "0.1.0" }
+bioformats-nd2       = { path = "crates/bioformats-nd2", version = "0.1.0" }
+bioformats-dicom     = { path = "crates/bioformats-dicom", version = "0.1.0" }
+bioformats-nifti     = { path = "crates/bioformats-nifti", version = "0.1.0" }
+bioformats-gatan     = { path = "crates/bioformats-gatan", version = "0.1.0" }
+bioformats-lsm       = { path = "crates/bioformats-lsm", version = "0.1.0" }
+bioformats-metamorph = { path = "crates/bioformats-metamorph", version = "0.1.0" }
+bioformats-micromanager = { path = "crates/bioformats-micromanager", version = "0.1.0" }
+bioformats-biorad       = { path = "crates/bioformats-biorad", version = "0.1.0" }
+bioformats-deltavision  = { path = "crates/bioformats-deltavision", version = "0.1.0" }
+bioformats-spe          = { path = "crates/bioformats-spe", version = "0.1.0" }
+bioformats-andor        = { path = "crates/bioformats-andor", version = "0.1.0" }
+bioformats-amira        = { path = "crates/bioformats-amira", version = "0.1.0" }
+bioformats-imagic       = { path = "crates/bioformats-imagic", version = "0.1.0" }
+bioformats-olympus      = { path = "crates/bioformats-olympus", version = "0.1.0" }
+bioformats-flim         = { path = "crates/bioformats-flim", version = "0.1.0" }
+bioformats-clinical     = { path = "crates/bioformats-clinical", version = "0.1.0" }
+bioformats-norpix       = { path = "crates/bioformats-norpix", version = "0.1.0" }
+bioformats-ome          = { path = "crates/bioformats-ome", version = "0.1.0" }
+bioformats-hamamatsu    = { path = "crates/bioformats-hamamatsu", version = "0.1.0" }
+bioformats-pcx          = { path = "crates/bioformats-pcx", version = "0.1.0" }
+bioformats-photoshop    = { path = "crates/bioformats-photoshop", version = "0.1.0" }
+bioformats-simfcs       = { path = "crates/bioformats-simfcs", version = "0.1.0" }
+bioformats-svs          = { path = "crates/bioformats-svs", version = "0.1.0" }
+bioformats-prairie      = { path = "crates/bioformats-prairie", version = "0.1.0" }
+bioformats-eps          = { path = "crates/bioformats-eps", version = "0.1.0" }
+bioformats-afm          = { path = "crates/bioformats-afm", version = "0.1.0" }
+bioformats-lim          = { path = "crates/bioformats-lim", version = "0.1.0" }
+bioformats-aim          = { path = "crates/bioformats-aim", version = "0.1.0" }
+bioformats-zip          = { path = "crates/bioformats-zip", version = "0.1.0" }
+bioformats-fake         = { path = "crates/bioformats-fake", version = "0.1.0" }
+bioformats-viff         = { path = "crates/bioformats-viff", version = "0.1.0" }
+bioformats-incell       = { path = "crates/bioformats-incell", version = "0.1.0" }
+bioformats-visitech     = { path = "crates/bioformats-visitech", version = "0.1.0" }
+bioformats-perkinelmer  = { path = "crates/bioformats-perkinelmer", version = "0.1.0" }
+bioformats-mias         = { path = "crates/bioformats-mias", version = "0.1.0" }
+bioformats-avi          = { path = "crates/bioformats-avi", version = "0.1.0" }
+bioformats-lei          = { path = "crates/bioformats-lei", version = "0.1.0" }
+bioformats-flex         = { path = "crates/bioformats-flex", version = "0.1.0" }
+bioformats-volocity     = { path = "crates/bioformats-volocity", version = "0.1.0" }
+bioformats-opus         = { path = "crates/bioformats-opus", version = "0.1.0" }
+bioformats-legacy       = { path = "crates/bioformats-legacy", version = "0.1.0" }
+bioformats-xrm          = { path = "crates/bioformats-xrm", version = "0.1.0" }
+bioformats-tiff-wrappers = { path = "crates/bioformats-tiff-wrappers", version = "0.1.0" }
+bioformats-misc          = { path = "crates/bioformats-misc", version = "0.1.0" }
+bioformats-extended      = { path = "crates/bioformats-extended", version = "0.1.0" }
+bioformats-hcs2          = { path = "crates/bioformats-hcs2", version = "0.1.0" }
+bioformats-sem           = { path = "crates/bioformats-sem", version = "0.1.0" }
+bioformats-spm           = { path = "crates/bioformats-spm", version = "0.1.0" }
+bioformats-camera2       = { path = "crates/bioformats-camera2", version = "0.1.0" }
+bioformats-flim2         = { path = "crates/bioformats-flim2", version = "0.1.0" }
+bioformats-misc4         = { path = "crates/bioformats-misc4", version = "0.1.0" }
+bioformats-imaris        = { path = "crates/bioformats-imaris", version = "0.1.0" }
+bioformats-bdv           = { path = "crates/bioformats-bdv", version = "0.1.0" }
+bioformats-cellh5        = { path = "crates/bioformats-cellh5", version = "0.1.0" }
+bioformats-zvi           = { path = "crates/bioformats-zvi", version = "0.1.0" }
 thiserror = { workspace = true }
 log = { workspace = true }
 
